@@ -1,0 +1,5 @@
+使用Intellj idea 开发工具创建web项目：
+1.如果使用ssh作为开发框架，则创建项目的时候采用创建Spring的方式。
+2.选择Spring，struts，hibernate后，导入外部jar包，idea帮我们生成必要的文件。
+3.创建一个tomcat，配置Deployment。
+4.点击Project Structure 配置项目 Moudules 和 lib，然后配置编译工具Artifact,即可。
