@@ -3,3 +3,118 @@
 2.选择Spring，struts，hibernate后，导入外部jar包，idea帮我们生成必要的文件。
 3.创建一个tomcat，配置Deployment。
 4.点击Project Structure 配置项目 Moudules 和 lib，然后配置编译工具Artifact,即可。
+5.将代码提交到github.com上：先add，后新建分支，再提交，最后push。
+
+
+
+
+
+
+
+
+
+
+spring 整合 hibernate.
+	整合的目的：①使用spring 的 IoC容器来管理 hibernate 的 SessionFactory ② 让hibernate 来使用spring的声明式事务.
+一、配置hibernate
+1.导入hibernate 相关的jar包，以及mysql驱动和c3p0 连接池jar包.
+2.加入hibernate.cfg.xml配置文件。此处只配置sql显示和格式化sql，数据库方言等信息，其他的连接数据源和SessionFactory在spring中配置。
+3.创建相应的实体类，并使用注解的方式将表表关系配置。
+
+二、配置spring
+1.导入spring相关jar包。
+2.加入applicationContext.xml配置文件。配置连接数据库的数据源和SessionFactory。
+3.创建测试类，使用JUnit测试在数据库中自动生成对应的表。
+
+4.Spring hibernate 事务的流程
+	 *
+	 * 1. 在方法开始之前
+	 * ①. 获取 Session
+	 * ②. 把 Session 和当前线程绑定, 这样就可以在 Dao 中使用 SessionFactory 的
+	 * getCurrentSession() 方法来获取 Session 了
+	 * ③. 开启事务
+	 *
+	 * 2. 若方法正常结束, 即没有出现异常, 则
+	 * ①. 提交事务
+	 * ②. 使和当前线程绑定的 Session 解除绑定
+	 * ③. 关闭 Session
+	 *
+	 * 3. 若方法出现异常, 则:
+	 * ①. 回滚事务
+	 * ②. 使和当前线程绑定的 Session 解除绑定
+	 * ③. 关闭 Session
+	 *
+
+三、配置struts2：
+1.加入struts2 相关的jar包,以及导入struts和spring集成的插件struts2-spring-plugin-2.3.24.1.jar包
+2.在web.xml中配置filter过滤器,ContextLoaderListener监听器
+3.添加struts.xml配置文件,配置相关action
+
+四、管理员登录功能的实现
+1.在新闻首页有登录小模块，包含用户名和密码,只有当管理员登录时才可以管理新闻信息，也就是才可以操作新闻的增删改查功能。
+2.新建index.jsp文件，里面包含index-top.jsp文件，用于登录.
+3.创建AdminDao.java接口，在AdminDaoImpl.java类中实现从数据库中查询管理员相关信息.
+4.创建AdminService.java，在AdminServiceImpl.java调用AdminDao.java定义的接口。
+5.创建AdminAction.java里面用于处理从页面请求的方法，即validateLogin验证登录的方法。
+
+五、新闻浏览首页的实现
+1.先写Pager分页实现。
+2.新闻浏览首页的设计。
+3.浏览新闻内容。
+
+六、新闻管理首页
+1.管理员登录成功后：<a href="/News/admin">登录控制台</a>，点击此超链接，将请求提交到 admin。
+2.在NewsinfoAction 类中添加 admin()方法，获取指定页的新闻列表，在转到新闻管理首页。
+3.在struts.xml中配置admin请求。
+4.设置新闻管理首页:admin.jsp
+
+七、添加新闻
+1.点击<a href="/News/toNewsAdd">添加新闻</a> 超链接，显示添加新闻页面。
+2.注意：新闻添加页要事先绑定主题下拉列表，故先把请求提交到 "toNewsAdd"，获取主题列表后，在转到新闻添加页显示。
+3.在 NewsinfoAction 中 添加 toNewsAdd()方法,用于获取新闻主题。
+4.在struts.xml配置文件中添加toNewsAdd()对应的action.
+5.设计news_add.jsp页面,将请求提交到doNewsAdd，实现如下：
+	(1).实现Dao层
+	(2).实现Service层
+	(3).实现Action
+	(4).配置struts.xml
+
+
+
+
+
+
+
+问题：
+一、关联关系的配置
+1.fetch和lazy的用法：
+(1).当lazy="true" fetch = "select" 的时候 ， 这个时候是使用了延迟策略，开始只查询出一端实体，多端的不会查询，只有当用到的时候才会发出sql语句去查询 ；
+(2).当lazy="false" fetch = "select" 的时候 ， 这个时候是使没有用延迟策略，同时查询出一端和多端，同时产生1+n条sql.
+(3).当lazy="true"/lazy="false" fetch = "join"的时候，这个时候延迟已经没有什么用了，因为采用的是外连接查询，同时把一端和多端都查询出来了，延迟没有起作用。
+
+1.inverse 的用法:
+inverse:指定哪一方不控制关联关系，一般在set上（1端不维护）
+
+2.cascade是否执行级联操作
+  <set name="children" lazy="true" cascade="all">
+   在保存主表的时候，如果没有保存从表信息，会抛出异常，如果设置了级联关系，可以自动先保存从表，再保存主表
+    all: 所有情况下均进行关联操作，即save-update和delete。
+    none: 所有情况下均不进行关联操作。这是默认值。
+    save-update: 在执行save/update/saveOrUpdate时进行关联操作。
+
+3.propagation="REQUIRED":如果当前没有事务，就新建一个事务，如果已经存在一个事务中，加入到这个事务中。
+
+4.Criteria
+Criteria与Session绑定，其生命周期跟随着Session结束而结束，使用Criteria时进行查询时，每次都要于执行时期动态建立物件，并加入各种查询条件，随着Session的回收，Criteria也跟着回收。
+
+5.Example工具类
+使用Example 工具类创建实类对象,构造查询条件
+
+6.Restrictions
+hibernate高级查询之约束
+
+7.在业务逻辑层中，不要使用private 定义dao属性：//	private AdminDao adminDao;
+而要使用：AdminDao adminDao;
+
+
+

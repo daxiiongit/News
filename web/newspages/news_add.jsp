@@ -29,7 +29,7 @@
 	}
 </script>
 <div id="main">
-  <jsp:include page="console_element/left.html" />
+  <jsp:include page="console_element/left.jsp" />
   <div id="opt_area">
     <h1 id="opt_type"> 添加新闻： </h1>
     <s:form action="doNewsAdd" method="post" onsubmit="return check()">

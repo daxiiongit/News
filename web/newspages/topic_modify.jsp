@@ -14,7 +14,7 @@
 	}
 </script>
 <div id="main">
-  <jsp:include page="console_element/left.html" />
+  <jsp:include page="console_element/left.jsp" />
   <div id="opt_area">
     <h1 id="opt_type">修改主题： </h1>
     <s:form action="/doTopicModify" method="post" onsubmit="return check()">
