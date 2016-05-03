@@ -229,4 +229,10 @@ public class NewsinfoAction extends ActionSupport implements RequestAware, Sessi
 		return "admin";
 	}
 
+	// 删除新闻
+	public String deleteNews(){
+		newsinfoService.deleteNews(id);
+		return "admin";
+	}
+
 }

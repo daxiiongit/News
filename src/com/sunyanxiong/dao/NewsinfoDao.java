@@ -24,4 +24,7 @@ public interface NewsinfoDao {
 	// 添加新闻
 	public void addNews(Newsinfo newsinfo);
 
+	// 删除新闻对象
+	public void deleteNewsinfo(Newsinfo newsinfo);
+
 }

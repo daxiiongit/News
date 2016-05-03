@@ -103,4 +103,11 @@ public class NewsinfoDaoImpl implements NewsinfoDao {
 		session.saveOrUpdate(newsinfo);
 	}
 
+	// 删除新闻
+	@Override
+	public void deleteNewsinfo(Newsinfo newsinfo) {
+		Session session = sessionFactory.getCurrentSession();
+		session.delete(newsinfo);
+	}
+
 }

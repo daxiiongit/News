@@ -25,4 +25,7 @@ public interface NewsinfoService {
 	// 添加新闻
 	public void addNews(Newsinfo newsinfo);
 
+	// 删除新闻
+	public void deleteNews(int id);
+
 }

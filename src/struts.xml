@@ -42,6 +42,11 @@
             <result name="admin" type="redirectAction">admin.action</result>
         </action>
 
+        <!-- 配置deleteNews，执行删除新闻操作 -->
+        <action name="deleteNews" class="newsinfoAction" method="deleteNews">
+            <result name="admin" type="redirectAction">admin.action</result>
+        </action>
+
     </package>
 
 </struts>
