@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+
+	<!-- 其它配置放入Spring 中配置，其实也可以不需要次文件，在Spring文件中也可以配置，为了保证hibernate的原生性 -->
+
+	<session-factory>
+	
+		<!-- SQL dialect -->
+		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+		<!-- Echo all executed SQL to stdout -->
+		<property name="format_sql">true</property>
+
+		<property name="show_sql">true</property>
+
+		<!-- Drop and re-create the database schema on startup -->
+		<property name="hbm2ddl.auto">update</property>
+	</session-factory>
+</hibernate-configuration>
