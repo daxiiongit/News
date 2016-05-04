@@ -9,7 +9,7 @@
 </script>
 
 <div id="main">
-  <jsp:include page="console_element/left.html" />
+  <jsp:include page="console_element/left.jsp" />
   <div id="opt_area">
     <ul class="classlist">  
     	<s:iterator id="topic" value="#request.topicList">

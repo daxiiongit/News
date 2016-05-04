@@ -47,6 +47,20 @@
             <result name="admin" type="redirectAction">admin.action</result>
         </action>
 
+        <!-- 配置addtopic，执行添加主题操作 -->
+        <action name="addtopic" class="topicAction" method="addtopic">
+            <result name="admin" type="redirectAction">admin.action</result>
+        </action>
+
+        <!-- 配置deletetopic，执行删除主题操作 -->
+        <action name="deletetopic" class="topicAction" method="deletetopic">
+            <result name="topiclist" type="redirectAction">topiclist.action</result>
+        </action>
+
+        <!-- 配置topiclist,执行现实主题操作 -->
+        <action name="topiclist" class="topicAction" method="topiclist">
+            <result name="topic_list">/newspages/topic_list.jsp</result>
+        </action>
     </package>
 
 </struts>

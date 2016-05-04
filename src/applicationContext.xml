@@ -84,4 +84,8 @@
         <property name="newsinfoService" ref="newsinfoService"></property>
     </bean>
 
+    <bean id="topicAction" class="com.sunyanxiong.action.TopicAction" scope="prototype">
+        <property name="topicService" ref="topicService"></property>
+    </bean>
+
 </beans>

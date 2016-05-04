@@ -25,4 +25,27 @@ public class TopicDaoImpl implements TopicDao {
 		return c.list();
 	}
 
+	// 添加主题
+	@Override
+	public void addTopic(Topic topic) {
+		Session session = sessionFactory.getCurrentSession();
+		session.saveOrUpdate(topic);
+	}
+
+	// 通过编号获取主题
+	@Override
+	public Topic getTopicById(int id) {
+		Session session = sessionFactory.getCurrentSession();
+		Topic topic = (Topic) session.get(Topic.class,id);
+
+		return topic;
+	}
+
+	// 删除主题（同时将该主题下面的所有新闻删除）
+	@Override
+	public void deleteTopic(Topic topic) {
+		Session session = sessionFactory.getCurrentSession();
+		session.delete(topic);
+	}
+
 }
