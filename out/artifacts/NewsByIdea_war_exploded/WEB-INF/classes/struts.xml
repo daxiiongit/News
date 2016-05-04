@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+        "http://struts.apache.org/dtds/struts-2.1.7.dtd">
+
+<struts>
+
+    <package name="news" extends="struts-default" namespace="/">
+
+        <!-- 使用通配符的方式书写action -->
+        <!-- <action name="validateLogin" class="adminAction" method="validateLogin">
+            <result name="index" type="redirectAction">index</result>
+        </action>-->
+        <action name="*" class="adminAction" method="{1}">
+            <result name="index" type="redirectAction">index.action</result>
+        </action>
+
+        <action name="index" class="newsinfoAction" method="index">
+            <result name="index">/index.jsp</result>
+        </action>
+
+        <action name="indexsidebar" class="newsinfoAction" method="indexsidebar">
+            <result name="index_sidebar">/index-elements/index_sidebar.jsp</result>
+        </action>
+
+        <action name="newsread" class="newsinfoAction" method="newsread">
+            <result name="news_read">/news_read.jsp</result>
+        </action>
+
+        <action name="admin" class="newsinfoAction" method="admin">
+            <result name="admin">/newspages/admin.jsp</result>
+        </action>
+
+        <!-- 在转到新闻添加页之前，获取新闻主题 -->
+        <action name="toNewsAdd" class="newsinfoAction" method="toNewsAdd">
+            <result name="news_add">/newspages/news_add.jsp</result>
+        </action>
+
+        <!-- 配置doNewsAdd,执行新闻添加 -->
+        <action name="doNewsAdd" class="newsinfoAction" method="doNewsAdd">
+            <result name="admin" type="redirectAction">admin.action</result>
+        </action>
+
+        <!-- 配置deleteNews，执行删除新闻操作 -->
+        <action name="deleteNews" class="newsinfoAction" method="deleteNews">
+            <result name="admin" type="redirectAction">admin.action</result>
+        </action>
+
+        <!-- 配置addtopic，执行添加主题操作 -->
+        <action name="addtopic" class="topicAction" method="addtopic">
+            <result name="admin" type="redirectAction">admin.action</result>
+        </action>
+
+        <!-- 配置deletetopic，执行删除主题操作 -->
+        <action name="deletetopic" class="topicAction" method="deletetopic">
+            <result name="topiclist" type="redirectAction">topiclist.action</result>
+        </action>
+
+        <!-- 配置topiclist,执行现实主题操作 -->
+        <action name="topiclist" class="topicAction" method="topiclist">
+            <result name="topic_list">/newspages/topic_list.jsp</result>
+        </action>
+    </package>
+
+</struts>

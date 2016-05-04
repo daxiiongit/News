@@ -64,4 +64,11 @@ public class NewsinfoServiceImpl implements NewsinfoService {
 		newsinfoDao.addNews(newsinfo);
 	}
 
+	// 删除新闻
+	@Override
+	public void deleteNews(int id) {
+		Newsinfo newsinfo = newsinfoDao.getNewsinfoById(id);
+		newsinfoDao.deleteNewsinfo(newsinfo);
+	}
+
 }

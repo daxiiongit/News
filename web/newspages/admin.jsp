@@ -8,7 +8,7 @@
 </script>
 
 <div id="main">
-  <jsp:include page="console_element/left.html" />
+  <jsp:include page="console_element/left.jsp" />
   <div id="opt_area">    
    <s:form ation="admin" method="post" theme="simple">
                       主题：<s:select name="newsinfo.topic.id" list="#request.topicList" listKey="id" listValue="name" cssClass="opt_input" />

@@ -31,7 +31,7 @@
 </script>
 
 <div id="main">
-  <jsp:include page="console_element/left.html" />
+  <jsp:include page="console_element/left.jsp" />
   <div id="opt_area">
     <h1 id="opt_type"> 修改新闻： </h1>
     <form action="/doNewsModify" method="post" onsubmit="return check()">

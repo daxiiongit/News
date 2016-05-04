@@ -211,7 +211,7 @@ public class NewsinfoAction extends ActionSupport implements RequestAware, Sessi
 		List topicList = topicService.getAllTopics();
 		request.put("topicList", topicList);
 		
-		System.out.println("topicList:" +topicList.get(0));
+		//System.out.println("topicList:" +topicList.get(0));
 		
 		return "news_add";
 	}
@@ -223,9 +223,15 @@ public class NewsinfoAction extends ActionSupport implements RequestAware, Sessi
 		newsinfo.setAuthor(admin.getUsername());
 		newsinfo.setCreatetime(new Date());
 		
-		System.out.println("newsinfo:" + newsinfo.getId());
+	//	System.out.println("newsinfo:" + newsinfo.getId());
 		
 		newsinfoService.addNews(newsinfo);
+		return "admin";
+	}
+
+	// 删除新闻
+	public String deleteNews(){
+		newsinfoService.deleteNews(id);
 		return "admin";
 	}
 
